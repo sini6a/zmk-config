@@ -1,15 +1,18 @@
+/*
+ * Copyright (c) 2020 The ZMK Contributors
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
 / {
-    key-matrix {
-        compatible = "zmk,matrix-transform";
+    chosen {
+        zmk,kscan = &kscan0;
+    };
 
-        rows = <4>;
-        columns = <10>;
-
-        // ⚡️ Replace with your real GPIOs:
-        row-gpios = <&gpio1 1 GPIO_ACTIVE_LOW>,
-                    <&gpio1 11 GPIO_ACTIVE_LOW>,
-                    <&gpio1 12 GPIO_ACTIVE_LOW>,
-                    <&gpio0 28 GPIO_ACTIVE_LOW>;
+    kscan0: kscan_0 {
+        compatible = "zmk,kscan-gpio-matrix";
+        wakeup-source;
+        diode-direction = "col2row";
 
         col-gpios = <&gpio0 9 GPIO_ACTIVE_LOW>,
                     <&gpio1 7 GPIO_ACTIVE_LOW>,
@@ -22,13 +25,9 @@
                     <&gpio0 6 GPIO_ACTIVE_LOW>,
                     <&gpio1 7 GPIO_ACTIVE_LOW>;
 
-        diode-direction = "col2row";
-    };
-
-    // 👇 Add this for the extra direct-wired GPIO key
-    p_key: p_key {
-        compatible = "zmk,gpio-input";
-        gpios = <&gpio0 4 GPIO_ACTIVE_LOW>;
-        label = "P Key";
+        row-gpios = <&gpio1 1 GPIO_ACTIVE_LOW>,
+                    <&gpio1 11 GPIO_ACTIVE_LOW>,
+                    <&gpio1 12 GPIO_ACTIVE_LOW>,
+                    <&gpio0 28 GPIO_ACTIVE_LOW>;
     };
 };
