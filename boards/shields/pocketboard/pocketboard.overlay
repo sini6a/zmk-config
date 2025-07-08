@@ -4,17 +4,32 @@
  * SPDX-License-Identifier: MIT
  */
 
-#include <physical_layouts.dtsi> // Include for physical layout definitions
-#include <dt-bindings/zmk/matrix_transform.h> // Include for matrix transform macros
-
 / {
     chosen {
-        zmk,kscan = &composite_kscan;
-        zmk,matrix-transform = &default_transform;
+        zmk,kscan = &kscan0;
     };
 
-    matrix_kscan: kscan_matrix {
+    kscan0: kscan_composite {
+        compatible = "zmk,kscan-composite";
+        rows = <4>;
+        columns = <10>;
+
+        // Include the matrix driver
+        matrix {
+            kscan = <&kscan1>;
+        };
+
+        // Include the direct GPIO driver...
+        direct {
+            kscan = <&kscan2>;
+            row-offset = <0>; // ...and shift it to not overlap
+            column-offset = <10>; // ...and shift it to not overlap
+        };
+    };
+
+    kscan1: kscan_matrix {
         compatible = "zmk,kscan-gpio-matrix";
+
         diode-direction = "col2row"; // Assumes diodes go from column to row (anode on col, cathode on row)
 
         // Your existing columns, with corrected GPIO flags for col2row
@@ -39,72 +54,11 @@
                     ;
     };
 
-    direct_kscan: kscan_direct { // New kscan for the direct key
+    kscan2: kscan_direct {
         compatible = "zmk,kscan-gpio-direct";
         wakeup-source; // You might want this key to wake the board
 
         // This key pulls to ground when pressed, so it's ACTIVE_LOW with PULL_UP
         input-gpios = <&gpio0 4 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
     };
-
-    composite_kscan: kscan_composite {
-        compatible = "zmk,kscan-composite";
-        // List the kscan instances you want to combine
-        // The order here matters for the matrix transform
-        kscans = <&matrix_kscan>, <&direct_kscan>;
-    };
-
-    default_transform: matrix_transform {
-        compatible = "zmk,matrix-transform";
-
-        rows = <4>;
-        columns = <10>;
-        
-        map = <
-            // Logical Row 0 (QWERTY: Q W E R T Y U I O P)
-            // Maps physical matrix_kscan (RC(0,0) to RC(0,8)) to logical (RC(0,0) to RC(0,8))
-            &matrix_kscan RC(0,0) // Logical RC(0,0) (Q) comes from matrix_kscan RC(0,0)
-            &matrix_kscan RC(0,1) // Logical RC(0,1) (W) comes from matrix_kscan RC(0,1)
-            &matrix_kscan RC(0,2) // Logical RC(0,2) (E) comes from matrix_kscan RC(0,2)
-            &matrix_kscan RC(0,3) // Logical RC(0,3) (R) comes from matrix_kscan RC(0,3)
-            &matrix_kscan RC(0,4) // Logical RC(0,4) (T) comes from matrix_kscan RC(0,4)
-            &matrix_kscan RC(0,5) // Logical RC(0,5) (Y) comes from matrix_kscan RC(0,5)
-            &matrix_kscan RC(0,6) // Logical RC(0,6) (U) comes from matrix_kscan RC(0,6)
-            &matrix_kscan RC(0,7) // Logical RC(0,7) (I) comes from matrix_kscan RC(0,7)
-            &matrix_kscan RC(0,8) // Logical RC(0,8) (O) comes from matrix_kscan RC(0,8)
-            &direct_kscan RC(0,0) // Logical RC(0,9) (P) comes from direct_kscan RC(0,0) (its only output)
-
-            // Logical Row 1 (QWERTY: A S D F G H J K L ; ')
-            &matrix_kscan RC(1,0) // A
-            &matrix_kscan RC(1,1) // S
-            &matrix_kscan RC(1,2) // D
-            &matrix_kscan RC(1,3) // F
-            &matrix_kscan RC(1,4) // G
-            &matrix_kscan RC(1,5) // H
-            &matrix_kscan RC(1,6) // J
-            &matrix_kscan RC(1,7) // K
-            &matrix_kscan RC(1,8) // L
-            &matrix_kscan RC(1,9) // Ö 
-
-            // Logical Row 2 (QWERTY: Z X C V B N M , . /)
-            &matrix_kscan RC(2,0) // Z
-            &matrix_kscan RC(2,1) // X
-            &matrix_kscan RC(2,2) // C
-            &matrix_kscan RC(2,3) // V
-            &matrix_kscan RC(2,4) // B
-            &matrix_kscan RC(2,5) // N
-            &matrix_kscan RC(2,6) // M
-            &matrix_kscan RC(2,7) // ,
-            &matrix_kscan RC(2,8) // . (assuming '.' is the 9th physical column for this row)
-            &matrix_kscan RC(2,9)
-
-            // Logical Row 3 (QWERTY Bottom Row - adjust these based on your specific keys and wiring)
-            &matrix_kscan RC(3,2)
-            &matrix_kscan RC(3,3)
-            &matrix_kscan RC(3,4)
-            &matrix_kscan RC(3,5)
-            &matrix_kscan RC(3,6)
-            &matrix_kscan RC(3,7)
-        >;
-    };
-};
+}
