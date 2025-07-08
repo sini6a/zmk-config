@@ -30,4 +30,11 @@
                     <&gpio1 12 GPIO_ACTIVE_LOW>,
                     <&gpio0 28 GPIO_ACTIVE_LOW>;
     };
+
+    // 👇 Add this for the extra direct-wired GPIO key
+    p_key: p_key {
+        compatible = "zmk,gpio-input";
+        gpios = <&gpio0 4 GPIO_ACTIVE_LOW>;
+        label = "P Key";
+    };
 };
