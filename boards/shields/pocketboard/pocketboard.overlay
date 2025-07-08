@@ -3,7 +3,7 @@
         compatible = "zmk,matrix-transform";
 
         rows = <4>;
-        cols = <10>;
+        columns = <10>;
 
         // ⚡️ Replace with your real GPIOs:
         row-gpios = <&gpio1 1 GPIO_ACTIVE_LOW>,
