@@ -1,3 +1,0 @@
-config SHIELD_POCKETBOARD
-    bool "Pocketboard DIY Shield"
-    default n
