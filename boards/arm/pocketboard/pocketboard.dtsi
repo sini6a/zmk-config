@@ -52,3 +52,12 @@
 zephyr_udc0: &usbd {
     status = "okay";
 };
+
+
+&flash0 {
+    /*
+     * For more information, see:
+     * http://docs.zephyrproject.org/latest/devices/dts/flash_partitions.html
+     */
+
+};
