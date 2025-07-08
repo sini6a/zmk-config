@@ -19,7 +19,5 @@
 #
 ---
 include:
-  - board: mikoto@5.20
-    shield: splitkb_aurora_corne_left
-  - board: mikoto@5.20
-    shield: splitkb_aurora_corne_right
+  - board: mikoto
+    shield: pocketboard
