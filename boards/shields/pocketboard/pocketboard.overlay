@@ -22,7 +22,7 @@
                     <&gpio0 6 GPIO_ACTIVE_LOW>,
                     <&gpio1 7 GPIO_ACTIVE_LOW>;
 
-        diode-direction = <COL2ROW>;
+        diode-direction = "col2row";
     };
 
     // 👇 Add this for the extra direct-wired GPIO key
