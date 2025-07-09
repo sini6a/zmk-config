@@ -27,6 +27,7 @@
 
     kscan0: kscan_composite {
         compatible = "zmk,kscan-composite";
+        wakeup-source;
 
         // Include the matrix driver
         matrix {
