@@ -39,6 +39,7 @@
 };
 
 &i2c0 {
+    status = "okay";
     max17048@36 {
         compatible = "zmk,maxim,max17048";
         reg = <0x36>;
