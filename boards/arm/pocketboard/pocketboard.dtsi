@@ -16,6 +16,8 @@
         zephyr,code-partition = &code_partition;
         zephyr,sram = &sram0;
         zephyr,flash = &flash0;
+        zephyr,console = &cdc_acm_uart0;
+        zmk,battery = &i2c0;
     };
 
     leds {
@@ -23,6 +25,10 @@
         blue_led: led_0 {
             gpios = <&gpio0 15 GPIO_ACTIVE_HIGH>;
         };
+    };
+
+    usb_cdc_acm_uart0: cdc_acm_uart0 {
+        compatible = "zephyr,cdc-acm-uart";
     };
 };
 
