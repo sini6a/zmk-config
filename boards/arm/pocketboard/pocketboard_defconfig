@@ -27,3 +27,9 @@ CONFIG_FLASH_MAP=y
 # Enable I2C
 CONFIG_I2C=y
 CONFIG_I2C_NRFX=y
+
+# Windows Battery Reporting Fix
+CONFIG_BT_GATT_ENFORCE_SUBSCRIPTION=n
+
+# Enable experimental BLE features to improve stability
+CONFIG_ZMK_BLE_EXPERIMENTAL_CONN=y
