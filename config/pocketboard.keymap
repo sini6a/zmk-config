@@ -52,6 +52,20 @@
                              &kp LGUI &trans &kp SPACE        &kp RET &trans &kp RALT
                         >;
                 };
+
+                extra_layer {
+// -----------------------------------------------------------------------------------------
+// |     |     |     |     |     |   |     |     |     |     |     |
+// |     |     |     |     |     |   |     | LFT | DWN |  UP | RGT |
+// |     |     |     |     |     |   |     |     |     |     |     |
+//             | GUI |     | SPC |   | ENT |     | ALT |
+                        bindings = <
+    &trans       &trans       &trans       &trans       &trans         &trans &trans &trans &trans &trans
+    &trans       &trans       &trans       &trans       &trans         &trans &kp LEFT &kp DOWN &kp UP &kp RIGHT
+    &trans       &trans       &trans       &trans       &trans         &trans &trans &trans &trans &trans
+                           &kp LGUI     &trans       &kp SPACE         &kp RET  &trans   &kp RALT
+                        >;
+                };
         };
 };
 
