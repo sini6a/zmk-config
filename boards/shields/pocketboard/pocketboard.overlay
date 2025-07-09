@@ -25,9 +25,25 @@
         >;
     };
 
-    kscan0: kscan_0 {
+    kscan0: kscan_composite {
+        compatible = "zmk,kscan-composite";
+        columns = <10>;
+        rows = <4>;
+
+        // Include the matrix driver
+        matrix {
+            kscan = <&kscan1>;
+        };
+
+        // Include the direct GPIO driver...
+        direct {
+            kscan = <&kscan2>;
+            column-offset = <10>; // ...and shift it to not overlap
+        };
+    };
+
+    kscan1: kscan_matrix {
         compatible = "zmk,kscan-gpio-matrix";
-        wakeup-source;
         diode-direction = "col2row";
 
         col-gpios = <&gpio0 9 GPIO_ACTIVE_HIGH>,
@@ -49,5 +65,11 @@
                     <&gpio0 28 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>    // Row 3
                     ;
 
+    };
+
+    kscan2: kscan_direct {
+        compatible = "zmk,kscan-gpio-direct";
+        wakeup-source;
+        input-gpios = <&gpio0 4 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
     };
 };
