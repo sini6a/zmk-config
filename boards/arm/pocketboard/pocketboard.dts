@@ -50,7 +50,7 @@
     pinctrl-names = "default", "sleep";
 
     fuel_gauge: max17048@36 {
-        compatible = "maxim,max17048";
+        compatible = "zmk,maxim-max17048";
         reg = <0x36>;
         label = "BATTERY";
         status = "okay";
