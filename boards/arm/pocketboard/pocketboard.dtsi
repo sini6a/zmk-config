@@ -43,10 +43,11 @@
 };
 
 &i2c0 {
-    compatible = "nordic,nrf-twi";
-    pinctrl-0 = <&i2c0_default>;
-    pinctrl-1 = <&i2c0_sleep>;
-    pinctrl-names = "default", "sleep";
+    max17048@36 {
+        compatible = "zmk,maxim,max17048";
+        reg = <0x36>;
+        label = "MAX17048";
+    };
 };
 
 zephyr_udc0: &usbd {
