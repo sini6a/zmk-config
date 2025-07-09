@@ -16,6 +16,7 @@
         zephyr,code-partition = &code_partition;
         zephyr,sram = &sram0;
         zephyr,flash = &flash0;
+        zmk,battery = &max17048@36;
     };
 
     leds {
@@ -50,6 +51,7 @@
         compatible = "zmk,maxim,max17048";
         reg = <0x36>;
         label = "MAX17048";
+        status = "okay";
     };
 };
 
