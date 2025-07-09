@@ -1,6 +1,0 @@
-if SHIELD_POCKETBOARD
-
-config ZMK_KEYBOARD_NAME
-    default "Pocketboard"
-
-endif
