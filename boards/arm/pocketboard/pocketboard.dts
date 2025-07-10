@@ -24,25 +24,27 @@
 		pwm-led0 = &blue_pwm_led;
 	};
 
-    pwmleds {
-		compatible = "pwm-leds";
-		status = "okay";
-		blue_pwm_led: pwm_led_0 {
-			pwms = <&pwm0 0 PWM_MSEC(20) PWM_POLARITY_INVERTED>;
-		};
-	};
+/*
+ *   pwmleds {
+ *		compatible = "pwm-leds";
+ *		status = "okay";
+ *		blue_pwm_led: pwm_led_0 {
+ *			pwms = <&pwm0 0 PWM_MSEC(20) PWM_POLARITY_INVERTED>;
+ *		};
+ *	};
+ */
 };
 
 &gpiote {
     
 };
 
-&pwm0 {
-	status = "okay";
-	pinctrl-0 = <&pwm0_default>;
-	pinctrl-1 = <&pwm0_sleep>;
-	pinctrl-names = "default", "sleep";
-};
+/*  &pwm0 {
+ *	status = "okay";
+ *	pinctrl-0 = <&pwm0_default>;
+ *	pinctrl-1 = <&pwm0_sleep>;
+ *	pinctrl-names = "default", "sleep";
+ */ };
 
 &gpio0 {
     status = "okay";
