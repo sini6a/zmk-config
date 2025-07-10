@@ -20,6 +20,31 @@
             low-power-enable;
         };
     };
+};
+
+
+/*
+ * Copyright (c) 2022 The ZMK Contributors
+ * SPDX-License-Identifier: MIT
+ */
+
+&pinctrl {
+    i2c0_default: i2c0_default {
+        group1 {
+            psels = <NRF_PSEL(TWIM_SDA, 0, 11)>,
+                    <NRF_PSEL(TWIM_SCL, 0, 7)>;
+            bias-pull-up;
+        };
+    };
+
+    i2c0_sleep: i2c0_sleep {
+        group1 {
+            psels = <NRF_PSEL(TWIM_SDA, 0, 11)>,
+                    <NRF_PSEL(TWIM_SCL, 0, 7)>;
+            bias-pull-up;
+            low-power-enable;
+        };
+    };
 
     unused_pins: unused_pins {
         group1 {
@@ -50,10 +75,4 @@
             bias-pull-down;
         };
     };
-};
-
-&pinctrl {
-    pinctrl-0 = <&i2c0_default &unused_pins>;
-    pinctrl-1 = <&i2c0_sleep &unused_pins>;
-    pinctrl-names = "default", "sleep";
 };
