@@ -1,4 +1,4 @@
 build:
-  cmake: .
+  cmake: config/.
   settings:
     board_root: .
