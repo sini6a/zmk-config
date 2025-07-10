@@ -1,4 +1,4 @@
 build:
-  cmake: app/.
+  # cmake: app/.
   settings:
     board_root: .
