@@ -1,5 +1,6 @@
 #include <zephyr/device.h>
 #include <zephyr/drivers/led.h>
+#include <zephyr/drivers/pwm.h>
 #include <zephyr/kernel.h>
 #include <zephyr/logging/log.h>
 
@@ -8,30 +9,40 @@
 
 LOG_MODULE_REGISTER(led_status, CONFIG_ZMK_LOG_LEVEL);
 
-#define LED_GPIO_NODE_ID DT_COMPAT_GET_ANY_STATUS_OKAY(gpio_leds)
+#define PWM_LED_NODE_ID DT_COMPAT_GET_ANY_STATUS_OKAY(gpio_leds)
 
 BUILD_ASSERT(DT_NODE_EXISTS(DT_ALIAS(led0)), "LED0 alias must be defined in the devicetree");
 
-static const struct device *led_dev = DEVICE_DT_GET(LED_GPIO_NODE_ID);
+static const struct device *pwm_dev = DEVICE_DT_GET(DT_PWMS_CTLR(PWM_LED_NODE_ID));
+static const uint32_t pwm_channel = DT_PWMS_CHANNEL(PWM_LED_NODE_ID);
+static const uint32_t pwm_flags = DT_PWMS_FLAGS(PWM_LED_NODE_ID);
 
 K_THREAD_STACK_DEFINE(led_stack_area, 512);
 static struct k_thread led_thread_data;
 
 static bool sleep_state = false;
 
+#define PWM_PERIOD_USEC 1000U // 1 kHz for example
+
+void set_led_brightness(uint32_t level) {
+    // level 0 = off, level 100 = full on
+    uint32_t pulse = (PWM_PERIOD_USEC * level) / 100;
+    pwm_set_pulse(pwm_dev, pwm_channel, PWM_PERIOD_USEC, pulse, pwm_flags);
+}
+
 static void led_thread_fn(void *, void *, void *) {
     bool prev_connected = false;
     bool prev_advertising = false;
 
     while (1) {
-        if (!device_is_ready(led_dev)) {
+        if (!device_is_ready(pwm_dev)) {
             LOG_ERR("LED device not ready");
             k_sleep(K_SECONDS(5));
             continue;
         }
 
         if (sleep_state) {
-            led_off(led_dev, 0);
+            set_led_brightness(0);
             k_sleep(K_SECONDS(1));
             continue;
         }
@@ -42,7 +53,7 @@ static void led_thread_fn(void *, void *, void *) {
         if (connected) {
             if (!prev_connected) {
                 LOG_INF("BLE connected → LED ON");
-                led_on(led_dev, 0);
+                set_led_brightness(50);
                 prev_connected = true;
                 prev_advertising = false;
             }
@@ -53,14 +64,14 @@ static void led_thread_fn(void *, void *, void *) {
                 prev_advertising = true;
                 prev_connected = false;
             }
-            led_on(led_dev, 0);
+            set_led_brightness(50);
             k_sleep(K_MSEC(200));
-            led_off(led_dev, 0);
+            set_led_brightness(0);
             k_sleep(K_MSEC(800));
         } else {
             // Not connected and not advertising
             LOG_INF("BLE idle → LED OFF");
-            led_off(led_dev, 0);
+            set_led_brightness(0);
             prev_connected = false;
             prev_advertising = false;
             k_sleep(K_SECONDS(1));
