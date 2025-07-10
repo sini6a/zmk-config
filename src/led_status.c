@@ -8,6 +8,7 @@
 #include <zephyr/drivers/led.h>
 #include <zephyr/logging/log.h>
 #include <zephyr/bluetooth/conn.h>
+#include <zmk/ble.h>
 #include <zmk/battery.h>
 #include <zmk/event_manager.h>
 #include <zmk/events/battery_state_changed.h>
