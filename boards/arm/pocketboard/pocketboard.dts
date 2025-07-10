@@ -19,10 +19,6 @@
         zephyr,flash = &flash0;
         zmk,battery = &fuel_gauge;
     };
-
-    aliases {
-        led0 = &blue_led;
-    };
 };
 
 &gpiote {
