@@ -10,7 +10,7 @@ LOG_MODULE_REGISTER(led_status, CONFIG_ZMK_LOG_LEVEL);
 
 #define LED_GPIO_NODE_ID DT_COMPAT_GET_ANY_STATUS_OKAY(gpio_leds)
 
-BUILD_ASSERT(DT_NODE_EXISTS((DT_ALIAS(led0))), "LED0 alias must be defined in the devicetree");
+BUILD_ASSERT(DT_NODE_EXISTS((DT_ALIAS(led0)), "LED0 alias must be defined in the devicetree");
 
 static const struct device *led_dev = DEVICE_DT_GET(LED_GPIO_NODE_ID);
 
