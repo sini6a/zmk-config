@@ -8,7 +8,7 @@
 
 LOG_MODULE_REGISTER(led_status, CONFIG_ZMK_LOG_LEVEL);
 
-#define LED_NODE DT_ALIAS(blue_led)
+#define LED_NODE DT_ALIAS(blueled)
 
 BUILD_ASSERT(DT_NODE_EXISTS(LED_NODE), "LED0 alias must be defined in the devicetree");
 

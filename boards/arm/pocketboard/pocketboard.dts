@@ -29,7 +29,7 @@
     };
 
     aliases {
-        blue-led = &blue_led;
+        blueled = &blue_led;
     };
 };
 
