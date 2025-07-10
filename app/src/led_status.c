@@ -9,12 +9,11 @@
 
 LOG_MODULE_REGISTER(led_status, CONFIG_ZMK_LOG_LEVEL);
 
-#define PWM_NODE DT_ALIAS(pwm0)
-#if !DT_NODE_EXISTS(PWM_NODE)
-#error "Unsupported board: pwm-led0 devicetree alias is not defined"
-#endif
+#define PWM_LED_ALIAS DT_ALIAS(pwm_led0)
 
-static const struct device *pwm_dev = DEVICE_DT_GET(PWM_NODE);
+BUILD_ASSERT(DT_NODE_EXISTS(PWM_LED_ALIAS), "LED0 alias must be defined in the devicetree");
+
+static const struct device *pwm_dev = DEVICE_DT_GET(PWM_LED_ALIAS);
 static const uint32_t pwm_channel = DT_PWMS_CHANNEL(PWM_LED_NODE_ID);
 static const uint32_t pwm_flags = DT_PWMS_FLAGS(PWM_LED_NODE_ID);
 

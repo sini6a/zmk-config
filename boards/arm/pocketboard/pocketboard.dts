@@ -20,6 +20,10 @@
         zmk,battery = &fuel_gauge;
     };
 
+	aliases {
+		pwm-led0 = &blue_pwm_led;
+	};
+
     pwmleds {
 		compatible = "pwm-leds";
 		status = "okay";
