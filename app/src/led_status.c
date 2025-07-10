@@ -14,8 +14,8 @@ LOG_MODULE_REGISTER(led_status, CONFIG_ZMK_LOG_LEVEL);
 BUILD_ASSERT(DT_NODE_EXISTS(PWM_LED_ALIAS), "LED0 alias must be defined in the devicetree");
 
 static const struct device *pwm_dev = DEVICE_DT_GET(PWM_LED_ALIAS);
-static const uint32_t pwm_channel = DT_PWMS_CHANNEL(PWM_LED_NODE_ID);
-static const uint32_t pwm_flags = DT_PWMS_FLAGS(PWM_LED_NODE_ID);
+static const uint32_t pwm_channel = DT_PWMS_CHANNEL(PWM_LED_ALIAS);
+static const uint32_t pwm_flags = DT_PWMS_FLAGS(PWM_LED_ALIAS);
 
 K_THREAD_STACK_DEFINE(led_stack_area, 512);
 static struct k_thread led_thread_data;
