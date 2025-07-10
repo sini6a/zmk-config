@@ -29,15 +29,20 @@
 };
 
 &gpiote {
-    status = "okay";
+    
 };
 
 &gpio0 {
     status = "okay";
+    // This is a list of all unused GPIOs on this port to be disabled
+    gpio-reset-pin = <5>, <27>, <1>, <0>, <13>, <14>, <16>, <17>, <19>,
+                        <20>, <21>, <22>, <23>, <24>, <25>, <10>, <29>, <31>, <30>;
 };
 
 &gpio1 {
     status = "okay";
+    // This is a list of all unused GPIOs on this port to be disabled
+    gpio-reset-pin = <8>, <0>, <3>, <5>, <10>;
 };
 
 &i2c0 {
