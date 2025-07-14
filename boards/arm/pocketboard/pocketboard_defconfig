@@ -35,4 +35,3 @@ CONFIG_ZMK_BLE=y
 CONFIG_BT_GATT_ENFORCE_SUBSCRIPTION=n
 
 # Enable experimental BLE features to improve stability
-CONFIG_ZMK_BLE_EXPERIMENTAL_CONN=y
