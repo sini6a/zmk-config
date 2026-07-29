@@ -146,11 +146,11 @@ zephyr_udc0: &usbd {
             reg = <0>;
             mipi-max-frequency = <8000000>;
             mipi-mode = "MIPI_DBI_MODE_SPI_4WIRE";
-            width = <160>;
-            height = <80>;
-            x-offset = <1>;
-            y-offset = <26>;
-            madctl = <0x60>;
+            width = <80>;
+            height = <160>;
+            x-offset = <0>;
+            y-offset = <0>;
+            madctl = <0x00>;
             colmod = <0x55>;
             vmctr1 = <0x0e>;
             pwctr1 = [A2 02 84];
@@ -160,6 +160,7 @@ zephyr_udc0: &usbd {
             pwctr5 = [8A EE];
             gamctrp1 = [10 0E 02 03 0E 07 02 07 0A 12 27 37 00 0D 0E 10];
             gamctrn1 = [10 0E 03 03 0F 06 02 08 0A 13 26 36 00 0D 0E 10];
+            inversion-on;
         };
     };
 };
