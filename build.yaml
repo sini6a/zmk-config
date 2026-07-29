@@ -20,4 +20,3 @@
 ---
 include:
   - board: pocketboard
-    shield: pocketboard
