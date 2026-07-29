@@ -131,34 +131,36 @@ zephyr_udc0: &usbd {
     cs-gpios = <&gpio1 13 GPIO_ACTIVE_LOW>;
 };
 
-mipi_dbi {
-    compatible = "zephyr,mipi-dbi-spi";
-    reset-gpios = <&gpio1 14 GPIO_ACTIVE_LOW>;
-    dc-gpios = <&gpio1 15 GPIO_ACTIVE_HIGH>;
-    spi-dev = <&spi1>;
-    #address-cells = <1>;
-    #size-cells = <0>;
+/ {
+    mipi_dbi {
+        compatible = "zephyr,mipi-dbi-spi";
+        reset-gpios = <&gpio1 14 GPIO_ACTIVE_LOW>;
+        dc-gpios = <&gpio1 15 GPIO_ACTIVE_HIGH>;
+        spi-dev = <&spi1>;
+        #address-cells = <1>;
+        #size-cells = <0>;
 
-    st7735_display: st7735r@0 {
-        compatible = "sitronix,st7735r";
-        reg = <0>;
-        mipi-max-frequency = <8000000>;
-        mipi-mode = "MIPI_DBI_MODE_SPI_4WIRE";
-        width = <80>;
-        height = <160>;
-        x-offset = <26>;
-        y-offset = <1>;
-        madctl = <0x00>;
-        colmod = <0x05>;
-        vmctr1 = <0x0e>;
-        pwctr1 = [A2 02 84];
-        pwctr2 = [C5];
-        pwctr3 = [0A 00];
-        pwctr4 = [8A 2A];
-        pwctr5 = [8A EE];
-        gamctrp1 = [10 0E 02 03 0E 07 02 07 0A 12 27 37 00 0D 0E 10];
-        gamctrn1 = [10 0E 03 03 0F 06 02 08 0A 13 26 36 00 0D 0E 10];
-        invert-mode = "2dot";
+        st7735_display: st7735r@0 {
+            compatible = "sitronix,st7735r";
+            reg = <0>;
+            mipi-max-frequency = <8000000>;
+            mipi-mode = "MIPI_DBI_MODE_SPI_4WIRE";
+            width = <80>;
+            height = <160>;
+            x-offset = <26>;
+            y-offset = <1>;
+            madctl = <0x00>;
+            colmod = <0x05>;
+            vmctr1 = <0x0e>;
+            pwctr1 = [A2 02 84];
+            pwctr2 = [C5];
+            pwctr3 = [0A 00];
+            pwctr4 = [8A 2A];
+            pwctr5 = [8A EE];
+            gamctrp1 = [10 0E 02 03 0E 07 02 07 0A 12 27 37 00 0D 0E 10];
+            gamctrn1 = [10 0E 03 03 0F 06 02 08 0A 13 26 36 00 0D 0E 10];
+            invert-mode = "2dot";
+        };
     };
 };
 
