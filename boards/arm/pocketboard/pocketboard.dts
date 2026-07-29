@@ -148,7 +148,7 @@ zephyr_udc0: &usbd {
             mipi-mode = "MIPI_DBI_MODE_SPI_4WIRE";
             width = <80>;
             height = <160>;
-            x-offset = <22>;
+            x-offset = <24>;
             y-offset = <0>;
             madctl = <0xc0>;
             colmod = <0x55>;
