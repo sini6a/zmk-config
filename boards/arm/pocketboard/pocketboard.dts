@@ -18,6 +18,8 @@
         zephyr,code-partition = &code_partition;
         zephyr,sram = &sram0;
         zephyr,flash = &flash0;
+        zmk,battery = &fuel_gauge;
+        zephyr,display = &st7735_display;
         zmk,kscan = &kscan0;
         zmk,matrix-transform = &default_transform;
     };
@@ -112,7 +114,7 @@
     fuel_gauge: max17048@36 {
         compatible = "zmk,maxim-max17048";
         reg = <0x36>;
-        status = "disabled";
+        status = "okay";
     };
 };
 
