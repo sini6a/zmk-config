@@ -87,7 +87,7 @@
 };
 
 &gpiote {
-    
+    status = "okay";
 };
 
 &gpio0 {
@@ -129,13 +129,21 @@ zephyr_udc0: &usbd {
     pinctrl-1 = <&spi1_sleep>;
     pinctrl-names = "default", "sleep";
     cs-gpios = <&gpio1 13 GPIO_ACTIVE_LOW>;
+};
+
+mipi_dbi {
+    compatible = "zephyr,mipi-dbi-spi";
+    reset-gpios = <&gpio1 14 GPIO_ACTIVE_LOW>;
+    dc-gpios = <&gpio1 15 GPIO_ACTIVE_HIGH>;
+    spi-dev = <&spi1>;
+    #address-cells = <1>;
+    #size-cells = <0>;
 
     st7735_display: st7735r@0 {
         compatible = "sitronix,st7735r";
         reg = <0>;
-        spi-max-frequency = <8000000>;
-        reset-gpios = <&gpio1 14 GPIO_ACTIVE_LOW>;
-        cmd-data-gpios = <&gpio1 15 GPIO_ACTIVE_LOW>;
+        mipi-max-frequency = <8000000>;
+        mipi-mode = "MIPI_DBI_MODE_SPI_4WIRE";
         width = <80>;
         height = <160>;
         x-offset = <26>;
