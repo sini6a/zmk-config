@@ -19,4 +19,5 @@
 #
 ---
 include:
-  - board: pocketboard
+  - board: nice_nano
+    shield: pocketboard
