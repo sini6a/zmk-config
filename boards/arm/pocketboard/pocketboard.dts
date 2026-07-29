@@ -7,7 +7,6 @@
 /dts-v1/;
 
 #include <nordic/nrf52840_qiaa.dtsi>
-#include <zephyr/dt-bindings/mipi_dbi/mipi_dbi.h>
 #include <dt-bindings/zmk/matrix_transform.h>
 #include "pocketboard-pinctrl.dtsi"
 
@@ -146,7 +145,7 @@ zephyr_udc0: &usbd {
             compatible = "sitronix,st7735r";
             reg = <0>;
             mipi-max-frequency = <8000000>;
-            mipi-mode = <MIPI_DBI_MODE_SPI_4WIRE>;
+            mipi-mode = "MIPI_DBI_MODE_SPI_4WIRE";
             width = <80>;
             height = <160>;
             x-offset = <26>;
