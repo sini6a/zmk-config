@@ -1,0 +1,6 @@
+board:
+  name: pocketboard
+  full_name: Pocketboard
+  vendor: Datakonsulten
+  socs:
+    - name: nrf52840
